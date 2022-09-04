@@ -12,7 +12,7 @@
 	
 	<groupId>com.victor.poc</groupId>
 	<artifactId>poc-spring-cqrs-event-sourcing</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>poc-spring-cqrs-event-sourcing</name>
   	<packaging>pom</packaging>
 	<description>POC de CQRS e EventSourcing com Spring Boot</description>

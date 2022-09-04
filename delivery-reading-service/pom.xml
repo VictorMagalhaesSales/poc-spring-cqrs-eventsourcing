@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.victor.poc</groupId>
     <artifactId>poc-spring-cqrs-event-sourcing</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
   </parent>
   
   <groupId>com.victor.poc.cqrs.eventsourcing.reading</groupId>
@@ -34,6 +34,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-mongodb</artifactId>
+		    <version>3.0.3.RELEASE</version>
 		</dependency>
 	</dependencies>
 </project>

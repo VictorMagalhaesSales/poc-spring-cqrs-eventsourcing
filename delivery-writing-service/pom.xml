@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.victor.poc</groupId>
     <artifactId>poc-spring-cqrs-event-sourcing</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
   </parent>
   
   <groupId>com.victor.poc.cqrs.eventsourcing.writing</groupId>
@@ -24,6 +24,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -42,7 +43,7 @@
 		</dependency>
 	</dependencies>
 	
-		<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

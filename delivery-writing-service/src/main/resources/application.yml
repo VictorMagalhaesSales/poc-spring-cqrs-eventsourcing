@@ -6,9 +6,9 @@ spring:
   password: guest
 
 server:
- port: 8081
+ port: 8080
  servlet:
-  context-path: "/reading"
+  context-path: "/writing"
 
 application:
  messeger:
