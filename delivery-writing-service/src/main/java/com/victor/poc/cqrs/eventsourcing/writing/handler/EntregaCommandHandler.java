@@ -5,7 +5,9 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.victor.poc.cqrs.eventsourcing.writing.client.EventStoreClient;
+import com.victor.poc.cqrs.eventsourcing.writing.client.RabbitMQClient;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.AtualizarLocalizacaoCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.CancelarEntregaCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarEntregaCommand;
@@ -24,49 +26,57 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.response.AcompanhamentoE
 public class EntregaCommandHandler {
 	
 	@Autowired
-	private EventStoreClient client;
+	private EventStoreClient eventStoreClient;
+	@Autowired
+	private RabbitMQClient rabbitMqClient;
 
 	public AcompanhamentoEntregaResponse handler(SelecionarProdutoCommand command) throws Exception {
 		ProdutoSelecionadoEvent evento = new ProdutoSelecionadoEvent(command);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
 
 	public AcompanhamentoEntregaResponse handler(String entregaId, SelecionarEntregadorCommand command) throws Exception {
 		EntregadorSelecionadoEvent evento = new EntregadorSelecionadoEvent(entregaId, command);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
 
 	public AcompanhamentoEntregaResponse handler(String entregaId, IniciarEntregaCommand command) 
-			throws InterruptedException, ExecutionException {
+			throws InterruptedException, ExecutionException, JsonProcessingException {
 		EntregaIniciadaEvent evento = new EntregaIniciadaEvent(entregaId);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
 
 	public AcompanhamentoEntregaResponse handler(String entregaId, AtualizarLocalizacaoCommand command) throws Exception {
 		LocalizacaoAtualizadaEvent evento = new LocalizacaoAtualizadaEvent(entregaId, command);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
 
 	public AcompanhamentoEntregaResponse handler(String entregaId, CancelarEntregaCommand command) 
-			throws InterruptedException, ExecutionException {
+			throws InterruptedException, ExecutionException, JsonProcessingException {
 		EntregaCanceladaEvent evento = new EntregaCanceladaEvent(entregaId);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
 
 	public AcompanhamentoEntregaResponse handler(String entregaId, FinalizarEntregaCommand command) 
-			throws InterruptedException, ExecutionException {
+			throws InterruptedException, ExecutionException, JsonProcessingException {
 		EntregaFinalizadaEvent evento = new EntregaFinalizadaEvent(entregaId);
-		client.publishEvent(evento);
+		eventStoreClient.publishEvent(evento);
+		rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}
