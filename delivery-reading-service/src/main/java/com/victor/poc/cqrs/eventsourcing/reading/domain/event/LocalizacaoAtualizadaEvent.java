@@ -9,11 +9,15 @@ import com.victor.poc.cqrs.eventsourcing.reading.domain.model.Endereco;
 import lombok.Getter;
 
 @Getter
-public class LocalizacaoAtualizadaEvent {
+public class LocalizacaoAtualizadaEvent implements Evento {
 
 	private UUID entregaId;
 	private StatusEntrega status;
 	private Endereco localizacaoAtual;
 	private Date dataAtualizacao;
 
+	@Override
+	public String getEventName() {
+		return "LOCALIZACAO_ATUALIZADA";
+	}
 }
