@@ -9,7 +9,7 @@ import com.victor.poc.cqrs.eventsourcing.reading.domain.model.Compra;
 import lombok.Getter;
 
 @Getter
-public class ProdutoSelecionadoEvent implements Evento {
+public class CompraFinalizadaEvent implements Evento {
 
 	private UUID entregaId;
 	private Compra compra;
@@ -18,6 +18,6 @@ public class ProdutoSelecionadoEvent implements Evento {
 
 	@Override
 	public String getEventName() {
-		return "PRODUTO_SELECIONADO";
+		return "COMPRA_FINALIZADA";
 	}
 }

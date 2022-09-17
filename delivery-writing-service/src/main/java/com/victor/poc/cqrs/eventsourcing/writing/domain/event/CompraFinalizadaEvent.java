@@ -2,7 +2,7 @@ package com.victor.poc.cqrs.eventsourcing.writing.domain.event;
 
 import java.util.UUID;
 
-import com.victor.poc.cqrs.eventsourcing.writing.domain.command.SelecionarProdutoCommand;
+import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarCompraCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.enums.StatusEntrega;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.model.Cliente;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.model.Compra;
@@ -10,14 +10,14 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.model.Compra;
 import lombok.Getter;
 
 @Getter
-public class ProdutoSelecionadoEvent implements Evento {
+public class CompraFinalizadaEvent implements Evento {
 
 	private UUID entregaId;
 	private Compra compra;
 	private Cliente cliente;
 	private StatusEntrega status;
 	
-	public ProdutoSelecionadoEvent(SelecionarProdutoCommand command) throws Exception {
+	public CompraFinalizadaEvent(FinalizarCompraCommand command) throws Exception {
 		this.entregaId = UUID.randomUUID();
 		this.status = StatusEntrega.ABERTA;
 		if(compraIsValid(command)) {
@@ -28,7 +28,7 @@ public class ProdutoSelecionadoEvent implements Evento {
 		}
 	}
 
-	private Boolean enderecoIsValid(SelecionarProdutoCommand command) throws Exception {
+	private Boolean enderecoIsValid(FinalizarCompraCommand command) throws Exception {
 		if(command.getCliente().getEndereco() == null) {
 			throw new Exception("O endereço do cliente não pode estar vazio");
 		} else if(command.getCliente().getNome() == null) {
@@ -37,12 +37,12 @@ public class ProdutoSelecionadoEvent implements Evento {
 		return true;
 	}
 
-	private Boolean compraIsValid(SelecionarProdutoCommand command) throws Exception {
+	private Boolean compraIsValid(FinalizarCompraCommand command) throws Exception {
 		if(command.getCompra() == null) {
 			throw new Exception("A compra não pode estar vazia");
 		} else if(command.getCompra().getEnderecoLoja() == null) {
 			throw new Exception("O endereço da loja não pode estar vazio");
-		} else if(command.getCompra().getProdutos() == null || command.getCompra().getProdutos().isEmpty()) {
+		} else if(command.getCompra().getCarrinho() == null || command.getCompra().getCarrinho().isEmpty()) {
 			throw new Exception("É necessário selecionar pelo menos um produto");
 		} else if(command.getCompra().getNomeLoja() == null) {
 			throw new Exception("O nome da loja não pode estar vazio");
@@ -57,7 +57,7 @@ public class ProdutoSelecionadoEvent implements Evento {
 
 	@Override
 	public String getEventName() {
-		return "PRODUTO_SELECIONADO";
+		return "COMPRA_FINALIZADA";
 	}
 
 }

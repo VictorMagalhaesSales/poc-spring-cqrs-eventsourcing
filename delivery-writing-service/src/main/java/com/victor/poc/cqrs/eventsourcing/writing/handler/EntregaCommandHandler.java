@@ -13,13 +13,13 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.command.CancelarEntregaC
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarEntregaCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.IniciarEntregaCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.SelecionarEntregadorCommand;
-import com.victor.poc.cqrs.eventsourcing.writing.domain.command.SelecionarProdutoCommand;
+import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarCompraCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregaCanceladaEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregaFinalizadaEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregaIniciadaEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregadorSelecionadoEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.LocalizacaoAtualizadaEvent;
-import com.victor.poc.cqrs.eventsourcing.writing.domain.event.ProdutoSelecionadoEvent;
+import com.victor.poc.cqrs.eventsourcing.writing.domain.event.CompraFinalizadaEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.response.AcompanhamentoEntregaResponse;
 
 @Service
@@ -30,8 +30,8 @@ public class EntregaCommandHandler {
 	@Autowired
 	private RabbitMQClient rabbitMqClient;
 
-	public AcompanhamentoEntregaResponse handler(SelecionarProdutoCommand command) throws Exception {
-		ProdutoSelecionadoEvent evento = new ProdutoSelecionadoEvent(command);
+	public AcompanhamentoEntregaResponse handler(FinalizarCompraCommand command) throws Exception {
+		CompraFinalizadaEvent evento = new CompraFinalizadaEvent(command);
 		eventStoreClient.publishEvent(evento);
 		rabbitMqClient.publishEvent(evento);
 		

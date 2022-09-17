@@ -8,6 +8,7 @@ import lombok.Data;
 public class Produto {
 
 	private String nome;
+	
 	private BigDecimal preco;
 	
 }

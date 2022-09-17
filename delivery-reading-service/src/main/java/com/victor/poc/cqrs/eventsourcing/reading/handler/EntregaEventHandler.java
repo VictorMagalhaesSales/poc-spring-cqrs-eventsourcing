@@ -8,7 +8,7 @@ import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregaFinalizadaE
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregaIniciadaEvent;
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregadorSelecionadoEvent;
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.LocalizacaoAtualizadaEvent;
-import com.victor.poc.cqrs.eventsourcing.reading.domain.event.ProdutoSelecionadoEvent;
+import com.victor.poc.cqrs.eventsourcing.reading.domain.event.CompraFinalizadaEvent;
 import com.victor.poc.cqrs.eventsourcing.reading.repository.EntregaRepository;
 
 @Component
@@ -17,8 +17,8 @@ public class EntregaEventHandler {
 	@Autowired
 	private EntregaRepository repository;
 	
-    public void handler(ProdutoSelecionadoEvent event) {
-    	System.out.println("ProdutoSelecionadoEvent");
+    public void handler(CompraFinalizadaEvent event) {
+    	System.out.println("CompraFinalizadaEvent");
 	}
 
     public void handler(EntregadorSelecionadoEvent event) {

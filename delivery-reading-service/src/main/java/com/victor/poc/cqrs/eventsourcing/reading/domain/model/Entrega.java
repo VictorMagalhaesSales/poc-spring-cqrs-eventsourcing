@@ -1,6 +1,6 @@
 package com.victor.poc.cqrs.eventsourcing.reading.domain.model;
 
-import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -19,12 +19,14 @@ public class Entrega {
 	@Id
 	private UUID id;
 	
-	private StatusEntrega status;
-	private Endereco localizacaoAtual;
-	private Date ultimaAtualizacao;
+	private Compra compra;
 	
 	private Entregador entregador;
-	private Produto produto;
+	
+	private StatusEntrega status;
+	
 	private Cliente cliente;
-
+	
+	private List<Checkpoint> checkpoints;
+	
 }

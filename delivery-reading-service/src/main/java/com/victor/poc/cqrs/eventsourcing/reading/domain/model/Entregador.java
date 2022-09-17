@@ -6,7 +6,9 @@ import lombok.Data;
 public class Entregador {
 
 	private String nome;
+	
 	private String telefone;
+	
 	private String veiculo;
 	
 }

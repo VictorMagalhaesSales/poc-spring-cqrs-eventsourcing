@@ -8,7 +8,7 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregaFinalizadaE
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregaIniciadaEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.EntregadorSelecionadoEvent;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.event.LocalizacaoAtualizadaEvent;
-import com.victor.poc.cqrs.eventsourcing.writing.domain.event.ProdutoSelecionadoEvent;
+import com.victor.poc.cqrs.eventsourcing.writing.domain.event.CompraFinalizadaEvent;
 
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class AcompanhamentoEntregaResponse {
 	private UUID entregaId;
 	private StatusEntrega status;
 	
-	public AcompanhamentoEntregaResponse(ProdutoSelecionadoEvent evento) {
+	public AcompanhamentoEntregaResponse(CompraFinalizadaEvent evento) {
 		this.entregaId = evento.getEntregaId();
 		this.status = evento.getStatus();
 	}

@@ -16,7 +16,7 @@ import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregaFinalizadaE
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregaIniciadaEvent;
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.EntregadorSelecionadoEvent;
 import com.victor.poc.cqrs.eventsourcing.reading.domain.event.LocalizacaoAtualizadaEvent;
-import com.victor.poc.cqrs.eventsourcing.reading.domain.event.ProdutoSelecionadoEvent;
+import com.victor.poc.cqrs.eventsourcing.reading.domain.event.CompraFinalizadaEvent;
 
 @Component
 public class EntregaEventConsumer {
@@ -31,19 +31,15 @@ public class EntregaEventConsumer {
     	mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     	
     	switch(getEventName(message, mapper)) {
-			case "ENTREGA_CANCELADA": 
-				EntregaCanceladaEvent entregaCanceladaEvent = mapper.readValue(message, EntregaCanceladaEvent.class);
-				handler.handler(entregaCanceladaEvent);
+
+			case "COMPRA_FINALIZADA": 
+				CompraFinalizadaEvent produtoSelecionadoEvent = mapper.readValue(message, CompraFinalizadaEvent.class);
+				handler.handler(produtoSelecionadoEvent);
 				break;
 				
 			case "ENTREGADOR_SELECIONADO": 
 				EntregadorSelecionadoEvent entregadorSelecionadoEvent = mapper.readValue(message, EntregadorSelecionadoEvent.class);
 				handler.handler(entregadorSelecionadoEvent);
-				break;
-				
-			case "ENTREGA_FINALIZADA": 
-				EntregaFinalizadaEvent entregaFinalizadaEvent = mapper.readValue(message, EntregaFinalizadaEvent.class);
-				handler.handler(entregaFinalizadaEvent);
 				break;
 				
 			case "ENTREGA_INICIADA": 
@@ -55,10 +51,15 @@ public class EntregaEventConsumer {
 				LocalizacaoAtualizadaEvent localizacaoAtualizadaEvent = mapper.readValue(message, LocalizacaoAtualizadaEvent.class);
 				handler.handler(localizacaoAtualizadaEvent);
 				break;
+			
+			case "ENTREGA_CANCELADA": 
+				EntregaCanceladaEvent entregaCanceladaEvent = mapper.readValue(message, EntregaCanceladaEvent.class);
+				handler.handler(entregaCanceladaEvent);
+				break;
 				
-			case "PRODUTO_SELECIONADO": 
-				ProdutoSelecionadoEvent produtoSelecionadoEvent = mapper.readValue(message, ProdutoSelecionadoEvent.class);
-				handler.handler(produtoSelecionadoEvent);
+			case "ENTREGA_FINALIZADA": 
+				EntregaFinalizadaEvent entregaFinalizadaEvent = mapper.readValue(message, EntregaFinalizadaEvent.class);
+				handler.handler(entregaFinalizadaEvent);
 				break;
     	}
     }

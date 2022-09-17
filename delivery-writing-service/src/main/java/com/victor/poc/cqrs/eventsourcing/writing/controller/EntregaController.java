@@ -14,7 +14,7 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.command.CancelarEntregaC
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarEntregaCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.IniciarEntregaCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.command.SelecionarEntregadorCommand;
-import com.victor.poc.cqrs.eventsourcing.writing.domain.command.SelecionarProdutoCommand;
+import com.victor.poc.cqrs.eventsourcing.writing.domain.command.FinalizarCompraCommand;
 import com.victor.poc.cqrs.eventsourcing.writing.domain.response.AcompanhamentoEntregaResponse;
 import com.victor.poc.cqrs.eventsourcing.writing.handler.EntregaCommandHandler;
 
@@ -25,8 +25,8 @@ public class EntregaController {
 	@Autowired
 	private EntregaCommandHandler entregaCommandHandler;
 	
-	@PostMapping("/loja/produto")
-	public ResponseEntity<AcompanhamentoEntregaResponse> selecionarProduto(@RequestBody SelecionarProdutoCommand command) throws Exception {
+	@PostMapping("/compra")
+	public ResponseEntity<AcompanhamentoEntregaResponse> finalizarCompra(@RequestBody FinalizarCompraCommand command) throws Exception {
 		
 		AcompanhamentoEntregaResponse resp = this.entregaCommandHandler.handler(command);
 		return ResponseEntity.created(null).body(resp);

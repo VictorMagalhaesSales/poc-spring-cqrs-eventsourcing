@@ -6,7 +6,7 @@ import com.victor.poc.cqrs.eventsourcing.writing.domain.model.Compra;
 import lombok.Data;
 
 @Data
-public class SelecionarProdutoCommand {
+public class FinalizarCompraCommand {
 	
 	private Compra compra;
 	private Cliente cliente;

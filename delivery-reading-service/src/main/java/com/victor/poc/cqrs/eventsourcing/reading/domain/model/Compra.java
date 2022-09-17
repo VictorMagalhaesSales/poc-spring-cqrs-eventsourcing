@@ -8,7 +8,9 @@ import lombok.Data;
 public class Compra {
 
 	private String nomeLoja;
+	
 	private Endereco enderecoLoja;
-	private List<Produto> produtos;
+	
+	private List<Produto> carrinho;
 	
 }
