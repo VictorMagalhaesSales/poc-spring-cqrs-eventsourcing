@@ -14,7 +14,7 @@ public class LocalizacaoAtualizadaEvent implements Evento {
 
 	private UUID entregaId;
 	private StatusEntrega status;
-	private Endereco localizacaoAtual;
+	private Endereco localizacao;
 	private Date dataAtualizacao;
 
 	public LocalizacaoAtualizadaEvent(String entregaId, AtualizarLocalizacaoCommand command) throws Exception {
@@ -22,13 +22,13 @@ public class LocalizacaoAtualizadaEvent implements Evento {
 		this.status = StatusEntrega.EM_ROTA;
 		this.dataAtualizacao = new Date();
 		if(localizacaoIsValid(command)) {
-			this.localizacaoAtual = command.getLocalizacaoAtual();			
+			this.localizacao = command.getLocalizacao();			
 		}
 	}
 
 	private Boolean localizacaoIsValid(AtualizarLocalizacaoCommand command) throws Exception {
-		if(command.getLocalizacaoAtual() == null) {
-			throw new Exception("A localização atual deve ser informada");
+		if(command.getLocalizacao() == null) {
+			throw new Exception("A localização deve ser informada");
 		}
 		return true;
 	}

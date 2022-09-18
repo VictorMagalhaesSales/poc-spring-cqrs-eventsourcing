@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class AtualizarLocalizacaoCommand {
 
-	private Endereco localizacaoAtual;
+	private Endereco localizacao;
 	
 }

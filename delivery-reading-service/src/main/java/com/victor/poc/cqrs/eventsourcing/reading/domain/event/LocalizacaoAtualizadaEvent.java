@@ -13,7 +13,7 @@ public class LocalizacaoAtualizadaEvent implements Evento {
 
 	private UUID entregaId;
 	private StatusEntrega status;
-	private Endereco localizacaoAtual;
+	private Endereco localizacao;
 	private Date dataAtualizacao;
 
 	@Override

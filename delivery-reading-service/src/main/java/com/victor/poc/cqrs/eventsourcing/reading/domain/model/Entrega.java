@@ -1,5 +1,6 @@
 package com.victor.poc.cqrs.eventsourcing.reading.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public class Entrega {
 	
 	private Cliente cliente;
 	
-	private List<Checkpoint> checkpoints;
+	@Builder.Default
+	private List<Checkpoint> checkpoints = new ArrayList<Checkpoint>();
 	
 }
