@@ -1,5 +1,6 @@
 package com.victor.poc.cqrs.eventsourcing.writing.client;
 
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,17 @@ public class RabbitMQClient {
     	ObjectMapper mapper = new ObjectMapper();
     	String jsonMessage = mapper.writeValueAsString(event);
         rabbitTemplate.convertAndSend(syncFanoutExchange, null, jsonMessage);
+    }
+
+
+    public void publishEventWithPriority(Object event, int priority) throws JsonProcessingException {
+    	MessagePostProcessor messagePostProcessor = message -> {
+    	    message.getMessageProperties().setPriority(priority);
+    	    return message;
+    	};
+    	ObjectMapper mapper = new ObjectMapper();
+    	String jsonMessage = mapper.writeValueAsString(event);
+        rabbitTemplate. convertAndSend(syncFanoutExchange, null, jsonMessage, messagePostProcessor);
     }
 
 }

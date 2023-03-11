@@ -41,7 +41,10 @@ public class EntregaCommandHandler {
 	public AcompanhamentoEntregaResponse handler(String entregaId, SelecionarEntregadorCommand command) throws Exception {
 		EntregadorSelecionadoEvent evento = new EntregadorSelecionadoEvent(entregaId, command);
 		eventStoreClient.publishEvent(evento);
-		rabbitMqClient.publishEvent(evento);
+		if(command.getMessagePriority() != null)
+			rabbitMqClient.publishEventWithPriority(evento, command.getMessagePriority().intValue());
+		else
+			rabbitMqClient.publishEvent(evento);
 		
 		return new AcompanhamentoEntregaResponse(evento);
 	}

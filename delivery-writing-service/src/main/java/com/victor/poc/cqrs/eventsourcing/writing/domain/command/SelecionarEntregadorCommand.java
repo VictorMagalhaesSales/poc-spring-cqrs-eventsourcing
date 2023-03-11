@@ -8,5 +8,6 @@ import lombok.Data;
 public class SelecionarEntregadorCommand {
 	
 	private Entregador entregador;
+	private Integer messagePriority;
 
 }
